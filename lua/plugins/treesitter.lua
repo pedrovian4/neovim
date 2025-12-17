@@ -11,6 +11,7 @@ return {
         "markdown",
         "markdown_inline",
         "php",
+        "php_only",
         "python",
         "query",
         "regex",
@@ -18,11 +19,24 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "elixir",
+        "heex",
         "blade",
       },
-      -- Disable LazyVim's tree-sitter-cli installation
-      install_cli = false,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { "blade" },
+      },
+      indent = {
+        enable = true,
+      },
+      injections = {
+        enable = true,
+      },
     },
   },
+  {
+    "EmranMR/tree-sitter-blade",
+    requires = { "nvim-treesitter/nvim-treesitter" },
+  },
 }
-

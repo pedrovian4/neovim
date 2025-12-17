@@ -6,3 +6,10 @@ vim.g.lazyvim_php_lsp = "intelephense"
 
 -- Fix encoding issues that may cause emojis to display as Chinese characters
 vim.opt.fileencoding = "utf-8"
+
+-- Associate Blade files with PHP for LSP support (Volt compatibility)
+vim.filetype.add({
+  pattern = {
+    [".*%.blade%.php"] = "blade",
+  },
+})

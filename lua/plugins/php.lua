@@ -4,9 +4,15 @@ return {
     opts = {
       servers = {
         intelephense = {
+          filetypes = { "php", "blade", "php_only" },
           settings = {
             intelephense = {
               licenceKey = "00MLLHDKS7PABFP",
+              filetypes = { "php", "blade", "php_only" },
+              files = {
+                associations = { "*.php", "*.blade.php" },
+                maxSize = 5000000,
+              },
             },
           },
         },
@@ -35,39 +41,10 @@ return {
           route = "<leader>lr",
           make = "<leader>lm",
         },
-
         sail = {
-          enabled = true,
-          auto = true,
+          enabled = false,
         },
       })
     end,
-  },
-  {
-    "saghen/blink.nvim",
-    opts = {
-      sources = {
-        default = { "laravel", "lsp", "path", "snippets", "buffer" },
-        providers = {
-          laravel = {
-            name = "laravel",
-            module = "laravel.blink_source",
-          },
-        },
-      },
-    },
-  },
-  {
-    "ricardoramirezr/blade-nav.nvim",
-    dependencies = { -- totally optional
-      "hrsh7th/nvim-cmp", -- if using nvim-cmp
-      { "ms-jpq/coq_nvim", branch = "coq" }, -- if using coq
-      "saghen/blink.cmp", -- if using blink.cmp
-    },
-    ft = { "blade", "php" }, -- optional, improves startup time
-    opts = {
-      -- This applies for nvim-cmp and coq, for blink refer to the configuration of this plugin
-      close_tag_on_complete = true, -- default: true
-    },
   },
 }
