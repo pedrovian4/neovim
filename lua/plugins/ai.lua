@@ -36,17 +36,8 @@ return {
     keys = {
       { "<leader>ag", nil, desc = "Gemini" },
       { "<leader>agg", "<cmd>Gemini toggle<cr>", desc = "Toggle Gemini CLI" },
-      { "<leader>agf", "<cmd>Gemini focus<cr>", desc = "Focus Gemini" },
-      { "<leader>agr", "<cmd>Gemini resume<cr>", desc = "Resume Gemini" },
-      { "<leader>ago", "<cmd>Gemini continue<cr>", desc = "Continue Gemini" },
-      { "<leader>agm", "<cmd>Gemini select_model<cr>", desc = "Select Model" },
-      { "<leader>agb", "<cmd>Gemini add_file<cr>", desc = "Add current buffer" }, -- Keeping this as is for now, will investigate the bug if it persists.
-      { "<leader>agt", "<cmd>Gemini tree_add<cr>", desc = "Add file from tree", ft = { "NvimTree", "neo-tree", "oil", "minifiles" } },
-      { "<leader>ags", "<cmd>Gemini send<cr>", mode = "v", desc = "Send selection" },
       { "<leader>aga", "<cmd>Gemini ask<cr>", desc = "Ask Gemini", mode = { "n", "v" } },
-      { "<leader>agd", nil, desc = "Gemini Diff" },
-      { "<leader>agda", "<cmd>Gemini diff_accept<cr>", desc = "Accept diff" },
-      { "<leader>agdd", "<cmd>Gemini diff_deny<cr>", desc = "Deny diff" },
+      { "<leader>agb", "<cmd>Gemini add_file<cr>", desc = "Add current buffer" },
     },
   },
 
