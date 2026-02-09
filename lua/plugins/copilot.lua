@@ -1,10 +1,2 @@
-return {
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
-    },
-    build = "make tiktoken",
-    opts = {},
-  },
-}
+-- CopilotChat configuration has been moved to lua/plugins/ai.lua
+return {}

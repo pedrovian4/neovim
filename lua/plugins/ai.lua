@@ -27,17 +27,124 @@ return {
     },
   },
 
-  -- Gemini CLI
+  -- OpenCode (OpenAI, Anthropic, etc.)
   {
-    "marcinjahn/gemini-cli.nvim",
-    cmd = "Gemini",
+    "nickjvandyke/opencode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    config = true,
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {
+        -- Provider configuration (defaults to snacks.nvim terminal)
+        provider = {
+          enabled = "snacks", -- Using snacks terminal for consistency with Claude Code
+          snacks = {
+            -- You can customize terminal settings here
+          },
+        },
+        -- Enable auto-reload when opencode edits files
+        events = {
+          reload = true,
+        },
+      }
+
+      -- Required for auto-reload functionality
+      vim.o.autoread = true
+    end,
     keys = {
-      { "<leader>ag", nil, desc = "Gemini" },
-      { "<leader>agg", "<cmd>Gemini toggle<cr>", desc = "Toggle Gemini CLI" },
-      { "<leader>aga", "<cmd>Gemini ask<cr>", desc = "Ask Gemini", mode = { "n", "v" } },
-      { "<leader>agb", "<cmd>Gemini add_file<cr>", desc = "Add current buffer" },
+      { "<leader>ao", nil, desc = "OpenCode" },
+
+      -- Core commands (similar to Claude Code workflow)
+      { "<leader>aoc", function() require("opencode").toggle() end, desc = "Toggle OpenCode", mode = { "n", "t" } },
+      {
+        "<leader>aoa",
+        function() require("opencode").ask("@this: ", { submit = true }) end,
+        desc = "Ask OpenCode",
+        mode = { "n", "x" },
+      },
+      { "<leader>aos", function() require("opencode").select() end, desc = "Select Action/Prompt" },
+
+      -- Buffer and selection management
+      {
+        "<leader>aob",
+        function() require("opencode").prompt("@buffer ") end,
+        desc = "Add buffer content",
+        mode = "n",
+      },
+      {
+        "<leader>aoF",
+        function()
+          local filepath = vim.fn.expand("%:p")
+          if filepath ~= "" then
+            require("opencode").prompt("@" .. filepath .. " ")
+          else
+            vim.notify("No file path for current buffer", vim.log.levels.WARN)
+          end
+        end,
+        desc = "Add file path (@/path)",
+        mode = "n",
+      },
+      {
+        "<leader>aov",
+        function() require("opencode").prompt("@visible ") end,
+        desc = "Add visible text",
+        mode = "n",
+      },
+      {
+        "<leader>aoS",
+        function() require("opencode").ask("@this ", { submit = true }) end,
+        desc = "Send selection",
+        mode = "x",
+      },
+
+      -- Operator for adding ranges (similar to Claude's context management)
+      {
+        "go",
+        function() return require("opencode").operator("@this ") end,
+        desc = "Add range to OpenCode",
+        expr = true,
+        mode = { "n", "x" },
+      },
+      {
+        "goo",
+        function() return require("opencode").operator("@this ") .. "_" end,
+        desc = "Add line to OpenCode",
+        expr = true,
+        mode = "n",
+      },
+
+      -- Pre-configured prompts
+      { "<leader>aoe", function() require("opencode").prompt("explain") end, desc = "Explain code", mode = { "n", "x" } },
+      { "<leader>aor", function() require("opencode").prompt("review") end, desc = "Review code", mode = { "n", "x" } },
+      { "<leader>aof", function() require("opencode").prompt("fix") end, desc = "Fix diagnostics", mode = "n" },
+      { "<leader>aot", function() require("opencode").prompt("test") end, desc = "Add tests", mode = { "n", "x" } },
+      { "<leader>aod", function() require("opencode").prompt("document") end, desc = "Add documentation", mode = { "n", "x" } },
+      {
+        "<leader>aoi",
+        function() require("opencode").prompt("implement") end,
+        desc = "Implement",
+        mode = { "n", "x" },
+      },
+
+      -- Session management
+      { "<leader>aon", function() require("opencode").command("session.new") end, desc = "New session" },
+      { "<leader>aol", function() require("opencode").command("session.list") end, desc = "List sessions" },
+      {
+        "<leader>aoq",
+        function() require("opencode").command("session.interrupt") end,
+        desc = "Interrupt session",
+      },
+
+      -- Scrolling (useful when OpenCode is in a terminal)
+      {
+        "<S-C-u>",
+        function() require("opencode").command("session.half.page.up") end,
+        desc = "Scroll OpenCode up",
+      },
+      {
+        "<S-C-d>",
+        function() require("opencode").command("session.half.page.down") end,
+        desc = "Scroll OpenCode down",
+      },
     },
   },
 
