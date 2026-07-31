@@ -13,6 +13,14 @@ return {
       { "<leader>acr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
       { "<leader>aco", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 
+      -- YOLO mode (sem prompts de permissao)
+      { "<leader>acy", "<cmd>ClaudeCode --dangerously-skip-permissions<cr>", desc = "Toggle Claude (YOLO)" },
+      {
+        "<leader>acY",
+        "<cmd>ClaudeCode --continue --dangerously-skip-permissions<cr>",
+        desc = "Continue Claude (YOLO)",
+      },
+
       { "<leader>acm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Model" },
       { "<leader>acb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
       {
