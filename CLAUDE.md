@@ -12,6 +12,7 @@ This is a LazyVim-based Neovim configuration optimized for PHP/Laravel developme
   - `options.lua`: Neovim options and global variables
   - `keymaps.lua`: Custom key mappings with smart Laravel/Inertia navigation
   - `autocmds.lua`: Auto-commands for editor behavior
+  - `worktree.lua`: Git worktree switching (`:Worktree*`, `<leader>gw*`), restarts the Claude Code terminal in the new worktree
 - **Plugin Configurations**: `lua/plugins/` contains plugin-specific configurations
   - `php.lua`: PHP development setup with Intelephense LSP and Laravel.nvim
   - `example.lua`: Template for additional plugin configurations
@@ -66,7 +67,8 @@ Within Neovim:
     │   ├── lazy.lua       # Plugin manager setup
     │   ├── options.lua    # Neovim options
     │   ├── keymaps.lua    # Custom key mappings
-    │   └── autocmds.lua   # Auto-commands
+    │   ├── autocmds.lua   # Auto-commands
+    │   └── worktree.lua   # Git worktree commands + Claude integration
     └── plugins/
         ├── php.lua        # PHP/Laravel configuration
         └── example.lua    # Plugin template
