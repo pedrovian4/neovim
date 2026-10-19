@@ -33,6 +33,9 @@ return {
       opts.picker.ui = opts.picker.ui or {}
       opts.picker.ui.highlights = false -- Disable treesitter highlights
 
+      -- Render images inline (kitty graphics protocol; needs `allow-passthrough on` in tmux)
+      opts.image = vim.tbl_deep_extend("force", opts.image or {}, { enabled = true })
+
       return opts
     end,
     -- stylua: ignore
